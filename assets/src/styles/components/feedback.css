@@ -1,0 +1,9 @@
+.error-message {
+    color: #fca5a5;
+}
+
+.result-count,
+.empty-state {
+    color: #d1d5db;
+    margin: 0 0 16px;
+}

@@ -1,0 +1,39 @@
+.results {
+    display: grid;
+    gap: 16px;
+}
+
+.result-card {
+    padding: 18px;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px);
+}
+
+.result-domain {
+    margin: 0 0 6px;
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+.result-title {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.result-title a:hover {
+    text-decoration: underline;
+}
+
+.result-url {
+    margin: 0 0 8px;
+    color: #86efac;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.result-snippet {
+    margin: 0;
+    color: #d1d5db;
+}
