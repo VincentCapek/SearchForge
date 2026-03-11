@@ -109,23 +109,36 @@ http://localhost:5173
 The frontend calls the Go API through routes such as:
 
 ```text
-GET /api/search?q=luffy
+GET /api/search/ddg?q=luffy
+GET /api/search/brave?q=luffy
 ```
 
 In development, Vite can be configured with a proxy to automatically forward `/api` requests to `http://localhost:8080`.
 
-## Main Endpoint
+## Search Endpoints
 
-### Search
+### DuckDuckGo Search
 
 ```http
-GET /api/search?q=your-query
+GET /api/search/ddg?q=your-query
 ```
 
 #### Example
 
 ```bash
-curl "http://localhost:8080/api/search?q=luffy"
+curl "http://localhost:8080/api/search/ddg?q=luffy"
+```
+
+### Brave Search
+
+```http
+GET /api/search/brave?q=your-query
+```
+
+#### Example
+
+```bash
+curl "http://localhost:8080/api/search/brave?q=luffy"
 ```
 
 #### Example response
@@ -171,11 +184,11 @@ This project is intended as a foundation for building a modern, lightweight, and
 ## Possible Roadmap
 
 - improve the SERP UI
-- add multiple search engines
 - add filters
 - improve the result fetching/parsing system
 - add search history
 - improve production mode to serve the frontend directly from Go
+- add more search engines
 
 ## Requirements
 

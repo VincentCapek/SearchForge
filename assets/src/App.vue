@@ -2,8 +2,13 @@
 import SearchBar from './components/SearchBar.vue'
 import SearchResultList from './components/SearchResultList.vue'
 import { useSearch } from './composables/useSearch'
+import { computed } from 'vue'
 
-const { query, loading, error, results, hasSearched, search } = useSearch()
+const { query, selectedEngine, loading, error, results, hasSearched, search } = useSearch()
+
+const engineDisplayName = computed(() => {
+  return selectedEngine.value === 'brave' ? 'Brave' : 'DuckDuckGo'
+})
 </script>
 
 <template>
@@ -17,7 +22,7 @@ const { query, loading, error, results, hasSearched, search } = useSearch()
       </header>
 
       <!-- Search bar -->
-      <SearchBar v-model="query" :loading="loading" @search="search" />
+      <SearchBar v-model="query" v-model:engine="selectedEngine" :loading="loading" @search="search" />
 
       <!-- States -->
       <div class="mt-7">
@@ -34,7 +39,7 @@ const { query, loading, error, results, hasSearched, search } = useSearch()
         <!-- Results -->
         <template v-else-if="hasSearched">
           <p class="count-line">
-            {{ results.length }} result{{ results.length !== 1 ? 's' : '' }}
+            {{ results.length }} result{{ results.length !== 1 ? 's' : '' }} from {{ engineDisplayName }}
           </p>
           <p v-if="results.length === 0" class="feedback-panel">No results found for your query.</p>
           <SearchResultList v-else :results="results" />

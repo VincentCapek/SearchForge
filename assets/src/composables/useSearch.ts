@@ -1,9 +1,12 @@
 import { ref } from 'vue'
 import type { SearchResult } from '../types/search'
-import { searchDuckDuckGo } from '../lib/api'
+import { searchDuckDuckGo, searchBrave } from '../lib/api'
+
+export type SearchEngine = 'ddg' | 'brave'
 
 export function useSearch() {
   const query = ref('')
+  const selectedEngine = ref<SearchEngine>('ddg')
   const loading = ref(false)
   const error = ref('')
   const results = ref<SearchResult[]>([])
@@ -15,7 +18,11 @@ export function useSearch() {
     hasSearched.value = true
 
     try {
-      results.value = await searchDuckDuckGo(query.value)
+      if (selectedEngine.value === 'brave') {
+        results.value = await searchBrave(query.value)
+      } else {
+        results.value = await searchDuckDuckGo(query.value)
+      }
     } catch (err) {
       results.value = []
       error.value = err instanceof Error ? err.message : 'Unknown error'
@@ -24,5 +31,5 @@ export function useSearch() {
     }
   }
 
-  return { query, loading, error, results, hasSearched, search }
+  return { query, selectedEngine, loading, error, results, hasSearched, search }
 }
