@@ -9,6 +9,7 @@ defineProps<{ result: SearchResult }>()
       <span>{{ result.domain }}</span>
     </div>
 
+
     <h2 class="text-xl leading-snug mb-0.5">
       <a
         :href="result.url"

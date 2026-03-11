@@ -8,7 +8,8 @@ import (
 func NewMux() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/api/search", api.SearchHandler)
+	mux.HandleFunc("/api/search/ddg", api.SearchHandlerDDG)
+	mux.HandleFunc("/api/search/brave", api.SearchHandlerBrave)
 	mux.HandleFunc("/health", healthHandler)
 
 	return mux

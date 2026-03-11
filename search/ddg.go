@@ -12,7 +12,7 @@ import (
 
 const ddgSearchEndpoint = "https://html.duckduckgo.com/html/?q="
 
-func GetDDGResults(query string) ([]SearchResult, error) {
+func GetDDGResults(query string) ([]SearchResultDuckDuckGo, error) {
 	searchURL := ddgSearchEndpoint + url.QueryEscape(query)
 
 	doc, err := utils.FetchDocument(searchURL)
@@ -20,7 +20,7 @@ func GetDDGResults(query string) ([]SearchResult, error) {
 		return nil, err
 	}
 
-	results := make([]SearchResult, 0)
+	results := make([]SearchResultDuckDuckGo, 0)
 
 	doc.Find(".result").Each(func(i int, item *goquery.Selection) {
 		if item.HasClass("result--ad") {
@@ -46,7 +46,7 @@ func GetDDGResults(query string) ([]SearchResult, error) {
 			return
 		}
 
-		results = append(results, SearchResult{
+		results = append(results, SearchResultDuckDuckGo{
 			Title: title,
 			URL: link,
 			Domain: host,
